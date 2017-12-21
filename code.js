@@ -26,32 +26,63 @@ var reserveContent = `<div class="container">
         <div class="col-md-4">
             <div class="form-group">
                 <label class="describeInput"for="exampleInputEmail1">Please Fill out this form to make a reservation</label>
-                <input class="form-control" placeholder="Your Name">
-                <input class="form-control" placeholder="Number of Investors">
-                <input class="form-control" placeholder="Would you like to have your investors researched? Yes or No">
-                <input class="form-control" placeholder="Preferred time of day">
-                <input class="form-control" placeholder="Preferred Date MM/DD/YYYY">
-                <input class="form-control" placeholder="Room Type: Private, Standard, or Large suite">
+                <input class="form-control name" placeholder="Your Name">
+                <input class="form-control investors" placeholder="Number of Investors">
+                <input class="form-control research" placeholder="Would you like to have your investors researched? Yes or No">
+                <input class="form-control time" placeholder="Preferred time of day">
+                <input class="form-control date" placeholder="Preferred Date MM/DD/YYYY">
+                <input class="form-control room" placeholder="Room Type: Private, Standard, or Large ">
                 <p>Private rooms seat 4 people maximum, Standard is a normal restaurant floor, and large suites seat 100 people maximum</p>
-                <input class="form-control" placeholder="Brief overview of your pitch">
+                <input class="form-control email" placeholder="Your email">
+                <input class="form-control pitch" placeholder="Brief overview of your pitch">
                 <input class="btn submit btn-default" type="submit" value="Submit">
+                <p class = "notDone"></p>
             </div><!-- end form -->
         </div>
         <div class="col-md-4"></div>
     </div> `;
-function renderContent(content){
+function renderContent(content) {
     $('.container').replaceWith(content);
+    console.log('switched');
 }
-function clickHandler(target,content){
-    $(target).on('click',function(){
+function clickHandler(target, content) {
+    $(target).on('click', function () {
         renderContent(content);
     })
 }
-function handleContent(){
+function handleForm() {
+    var done = false;
+    var formVal = [$('.name').val(), $('.investors').val(), $('.research').val(), $('.time').val(), $('.date').val(), $('.room').val(), $('.email').val(), $('.pitch').val()];
+    for (i = 0; i < formVal.length; i++) {
+        if (formVal[i] === "") {
+            $('.notDone').replaceWith(`<p class = "notDone">Please fill out all boxes</p>`)
+            console.log('not done');
+            break;
+        } else {
+            done = true;
+            console.log('done');
+        }
+    }
+    if (done) {
+        $('.container').replaceWith(`<div class="container">
+            <p class="doneText">Thank you `+ formVal[0] + ` for making a reservation for ` + (formVal[1] + 1) + ` on ` + formVal[4] + ` in a ` + formVal[5] + `. We will send you an email regarding your reservations.</p>
+        </div>`)
+        console.log('thank you should be on page');
+    }
+}
+function handleContent() {
     renderContent(homeContent);
-    clickHandler('.clickHome',homeContent);
-    clickHandler('.clickServices',servicesContent);
-    clickHandler('.clickContact',contactContent);
-    clickHandler('.clickReserve',reserveContent);
+    clickHandler('.clickHome', homeContent);
+    clickHandler('.clickServices', servicesContent);
+    clickHandler('.clickContact', contactContent);
+    $('.clickReserve').on('click', function () {
+        renderContent(reserveContent);
+        $('.submit').on('click', function () {
+            console.log('submit clicked');
+            handleForm();
+        });
+    })
+
+    console.log('handling')
 }
 $(handleContent);
