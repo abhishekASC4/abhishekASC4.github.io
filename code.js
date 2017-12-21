@@ -65,7 +65,7 @@ function handleForm() {
     }
     if (done) {
         $('.container').replaceWith(`<div class="container">
-            <p class="doneText">Thank you `+ formVal[0] + ` for making a reservation for ` + (formVal[1] + 1) + ` on ` + formVal[4] + ` in a ` + formVal[5] + `. We will send you an email regarding your reservations.</p>
+            <p class="doneText">Thank you `+ formVal[0] + ` for making a reservation for ` + (formVal[1] + 1) + ` on ` + formVal[4] + ` in a ` + formVal[5] + ` room. We will send you an email regarding your reservations.</p>
         </div>`)
         console.log('thank you should be on page');
     }
