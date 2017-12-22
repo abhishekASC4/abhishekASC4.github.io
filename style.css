@@ -55,3 +55,8 @@
 .notDone{
     color: red;
 }
+@media(max-width: 1000px){
+    .col-md-6 img{
+        margin-right: 0px;
+    }
+}

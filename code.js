@@ -57,6 +57,7 @@ function handleForm() {
         if (formVal[i] === "") {
             $('.notDone').replaceWith(`<p class = "notDone">Please fill out all boxes</p>`)
             console.log('not done');
+            done = false;
             break;
         } else {
             done = true;
@@ -65,7 +66,7 @@ function handleForm() {
     }
     if (done) {
         $('.container').replaceWith(`<div class="container">
-            <p class="doneText">Thank you `+ formVal[0] + ` for making a reservation for ` + (formVal[1] + 1) + ` on ` + formVal[4] + ` in a ` + formVal[5] + ` room. We will send you an email regarding your reservations.</p>
+            <p class="doneText">Thank you `+ formVal[0] + ` for making a reservation for ` + (parseInt(formVal[1]) + 1) + ` on ` + formVal[4] + ` in a ` + formVal[5] + ` room. We will send you an email regarding your reservations.</p>
         </div>`)
         console.log('thank you should be on page');
     }
